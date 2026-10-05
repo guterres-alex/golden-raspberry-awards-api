@@ -25,7 +25,7 @@ public class Movie {
 	@Column(name = "release_year", nullable = false)
 	private int year;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = ColumnLimits.TEXT_MAX_LENGTH)
 	private String title;
 
 	@Column(nullable = false)

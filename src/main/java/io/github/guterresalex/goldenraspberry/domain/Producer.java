@@ -18,10 +18,10 @@ public class Producer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = ColumnLimits.TEXT_MAX_LENGTH)
 	private String name;
 
-	@Column(name = "name_key", nullable = false, unique = true)
+	@Column(name = "name_key", nullable = false, unique = true, length = ColumnLimits.TEXT_MAX_LENGTH)
 	private String nameKey;
 
 	protected Producer() {
