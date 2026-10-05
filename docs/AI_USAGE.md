@@ -55,7 +55,10 @@
 | Revisão | Título longo (>255) derruba a inicialização; sugeriu só registrar | Título ou nome acima de 255 caracteres = linha malformada, ignorada com aviso | Coerente com a regra de não derrubar a aplicação por uma linha; limite em constante única |
 | Revisão | CSV em outra codificação lido sem erro | Registrado como risco | O CLAUDE.md define UTF-8; detectar codificação seria complexidade desnecessária |
 | Revisão | Espaço não separável passa pelo trim | Mantido | Caso improvável; mudaria a regra de normalização |
-
+| Revisão | pr-test-analyzer: CSV oficial em ordem cronológica não detecta falta de ordenação | Cenário com linhas fora de ordem na etapa 4 | O teste precisa falhar se a ordenação for removida |
+| Revisão | Lacunas: winner com caixa variada, BOM, limites de 255 | Viraram requisitos e cenários da etapa 4 | Cobrir as regras do CLAUDE.md, não só o CSV oficial |
+| Revisão | Teste de Problem Details como opcional | Incluído: 405 e 404 | Demonstra o nível 2 de Richardson exigido pela especificação |
+| Revisão | Manter a verificação exata do content type | `contentTypeCompatibleWith` | Evita quebra caso a resposta inclua `;charset=UTF-8` |
 
 ## Logs
 - `docs/ai-log/01-claude-md.md`: criação e revisão do CLAUDE.md.
@@ -64,3 +67,4 @@
 - `docs/ai-log/03-plano-implementacao.md`: plano de implementação (salvo em `docs/PLANO.md`).
 - `docs/ai-log/04-entidades.md`: etapa 1, entidades e repositórios; decisão sobre o Lombok e revisão de código.
 - `docs/ai-log/05-carga-csv.md`: etapa 2, leitura e carga do CSV; ajustes do BOM, da chave de filme repetido e do limite de 255 caracteres, revisão de código e de falhas silenciosas.
+- `docs/ai-log/06-intervalos-premios.md`: etapa 3, cálculo dos intervalos e endpoint; revisão de código e de testes, com novos cenários incorporados ao plano.
