@@ -59,6 +59,8 @@
 | Revisão | Lacunas: winner com caixa variada, BOM, limites de 255 | Viraram requisitos e cenários da etapa 4 | Cobrir as regras do CLAUDE.md, não só o CSV oficial |
 | Revisão | Teste de Problem Details como opcional | Incluído: 405 e 404 | Demonstra o nível 2 de Richardson exigido pela especificação |
 | Revisão | Manter a verificação exata do content type | `contentTypeCompatibleWith` | Evita quebra caso a resposta inclua `;charset=UTF-8` |
+| Cenários | Arquivos gerados sem quebra de linha final, mesmo com a regra no CLAUDE.md | Correção em commit `style` separado; o agente salvou uma memória para conferir sempre | Limitação da ferramenta de escrita; manter o histórico limpo |
+| Cenários | Instrução ambígua minha na retomada fez o agente criar o cenário 5 sem apresentar a proposta | Conferi o cálculo depois da criação e reforcei o passo 0 da skill | Instruções explícitas evitam que o agente interprete "seguir" como aprovação |
 
 ## Logs
 - `docs/ai-log/01-claude-md.md`: criação e revisão do CLAUDE.md.
