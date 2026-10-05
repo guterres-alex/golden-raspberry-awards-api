@@ -19,7 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
  *
  * Linhas consideradas: as 5 são vencedoras e válidas, com títulos distintos.
  *   - A ordem no CSV (2015, 2002, 2008, 2001, 2014) não é cronológica: se o
- *     ano sair do order by da query, os intervalos viram -13, 6, -7, 13.
+ *     ano sair do order by da query, os intervalos tendem a virar -13, 6, -7, 13
+ *     (o H2 não garante a ordem de inserção).
  *
  * Vitórias por produtor:
  *   Produtor A: 2001, 2002, 2008, 2014, 2015
