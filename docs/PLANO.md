@@ -64,16 +64,28 @@ Toda etapa termina com `./mvnw test`, relatando executados, falhas e erros, e pa
 Ordem sugerida:
 1. resultado vazio
 2. intervalo 0
-3. empates no min/max
-4. vários pares do mesmo produtor
+3. empates no min/max. A ordem de aparição no CSV deve ser diferente das chaves de ordenação, senão o teste passa mesmo sem o sort:
+   - dois produtores empatados com o mesmo `previousWin`, o de nome maior aparecendo primeiro (ex.: "Zed" antes de "Amy"), para testar o desempate por `producer`;
+   - um produtor que aparece primeiro no CSV mas tem `previousWin` maior, para testar a chave principal.
+4. vários pares do mesmo produtor. As linhas ficam fora de ordem cronológica no CSV (ex.: 2015, 2002, 2008), para que o teste falhe se o `m.year` sair do `order by` da query.
 5. nomes com caixa e espaços diferentes
 6. separadores `,` / ` and ` / `, and `
 7. produtor repetido no mesmo filme
 8. filme repetido (vale a primeira ocorrência)
-9. linhas malformadas ignoradas (inclui uma linha com título de 256 caracteres)
-10. falha de inicialização: arquivo inexistente, cabeçalho inválido e caminho sem prefixo (`assertThrows` com `SpringApplicationBuilder`).
+9. linhas malformadas ignoradas. Os dois lados do limite de 255 são testados:
+   - título com exatamente 255 caracteres, numa vitória que precisa contar;
+   - título, produtor e estúdio com 256 caracteres, cada um numa linha vencedora que precisa ser ignorada.
+   O JSON esperado só fica certo se as regras de limite estiverem todas corretas.
+10. `winner` sem diferenciar maiúsculas e com trim: `YES`, `Yes` e ` yes ` contam como vitória; `y`, `true` e `no` não contam.
+    Um vencedor falso fica entre duas vitórias reais do mesmo produtor, de modo que contá-lo mudaria o `min`.
+11. BOM e cabeçalho válido com variações: o arquivo começa com os bytes `EF BB BF` e o cabeçalho é ` Year ; TITLE;Studios;producers ;WINNER`.
+    A aplicação deve subir e devolver um resultado conhecido. Conferir os bytes do arquivo com `od -c` depois de criá-lo.
+12. falha de inicialização: arquivo inexistente, cabeçalho inválido e caminho sem prefixo (`assertThrows` com `SpringApplicationBuilder`).
     O Spring embrulha a exceção lançada pelo `ApplicationRunner` numa `IllegalStateException("Failed to execute ApplicationRunner")`,
     então os testes devem conferir a causa raiz (tipo e mensagem), não só a exceção externa.
+13. verbos e status HTTP (nível 2 de Richardson), com o CSV original e sem dataset próprio:
+    - `POST /api/producers/award-intervals` → `405` com content type compatível com `application/problem+json`;
+    - `GET` numa URL inexistente → `404` com content type compatível com `application/problem+json`.
 
 **Verificação:** `./mvnw test` a cada cenário, com o total de testes aumentando. Se um cenário falhar com o cálculo correto, ele achou um bug: o agente para e relata.
 **Branch:** `test/cenarios-csv`. Um commit por cenário, ex.: `test: adiciona cenário de intervalo zero`.
