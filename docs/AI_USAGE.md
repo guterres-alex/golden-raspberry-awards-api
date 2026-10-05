@@ -12,7 +12,7 @@
 1. Planejamento — concluído
 2. Contexto (CLAUDE.md) — concluído
 3. Ferramentas (plugin de revisão e skill de testes) — concluído
-4. Implementação em etapas — em andamento
+4. Implementação em etapas — concluído
 5. Testes de integração — pendente
 6. Documentação — pendente
 
@@ -62,6 +62,7 @@
 | Cenários | Arquivos gerados sem quebra de linha final, mesmo com a regra no CLAUDE.md | Correção em commit `style` separado; o agente salvou uma memória para conferir sempre | Limitação da ferramenta de escrita; manter o histórico limpo |
 | Cenários | Instrução ambígua minha na retomada fez o agente criar o cenário 5 sem apresentar a proposta | Conferi o cálculo depois da criação e reforcei o passo 0 da skill | Instruções explícitas evitam que o agente interprete "seguir" como aprovação |
 | Cenários | Padrão de teste de falha do CLAUDE.md usava `.properties()`, de prioridade menor que o `application.properties`; os testes falharam | Caminho passado como argumento de linha de comando; contexto fechado se subir inesperadamente; CLAUDE.md corrigido | O teste revelou um erro na própria regra; corrigir a regra, não o esperado |
+| Cenários | Corpo do erro com STRICT completo dependeria de textos do Spring | LENIENT nos campos estáveis do RFC 9457, como exceção explicada | Testar o comportamento do projeto, não o texto do framework |
 
 ## Logs
 - `docs/ai-log/01-claude-md.md`: criação e revisão do CLAUDE.md.
@@ -71,3 +72,6 @@
 - `docs/ai-log/04-entidades.md`: etapa 1, entidades e repositórios; decisão sobre o Lombok e revisão de código.
 - `docs/ai-log/05-carga-csv.md`: etapa 2, leitura e carga do CSV; ajustes do BOM, da chave de filme repetido e do limite de 255 caracteres, revisão de código e de falhas silenciosas.
 - `docs/ai-log/06-intervalos-premios.md`: etapa 3, cálculo dos intervalos e endpoint; revisão de código e de testes, com novos cenários incorporados ao plano.
+- `docs/ai-log/07-cenarios-parte1.md`: etapa 4, cenários 1 a 3 (resultado vazio, intervalo 0 e empates).
+- `docs/ai-log/07-cenarios-parte2.md`: etapa 4, cenários 4 a 8 (pares fora de ordem, nomes, separadores e repetições).
+- `docs/ai-log/07-cenarios-parte3.md`: etapa 4, cenários 9 a 13 (linhas malformadas, winner, BOM, falha de inicialização e status HTTP).
