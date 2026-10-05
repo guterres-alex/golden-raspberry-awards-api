@@ -37,8 +37,16 @@
 | Ferramentas | Custo de ~2,1k tokens/turno do plugin | Um único plugin de revisão | Controle do consumo de contexto |
 | Skill | Alertou que classes `*IT` seriam ignoradas pelo Surefire | Sufixo `Test` | Todos os testes já são de integração; evita alterar o build |
 | Skill | Pacote base fixo no corpo da skill | Editei manualmente para referenciar a classe principal | Evitar duplicar informação visível no código |
+| Plano | Leitura do CSV numa etapa sem verificação possível | Juntei leitura e carga numa etapa | Cada etapa precisa de uma verificação concreta |
+| Plano | README como etapa opcional | Obrigatório | Exigido pela especificação |
+| Plano | Caminho sem prefixo | Falha a inicialização | Erro de configuração deve falhar cedo |
+| Plano | Filme repetido com dados diferentes | Vale a primeira ocorrência | Simples e previsível |
+| Plano | Habilitar o H2 console | Desligado | Desnecessário; o log basta para verificar a carga |
+| Plano | Substituir o `contextLoads` | Pelo teste do oráculo na etapa do endpoint | Redundante e fora do padrão MockMvc |
+| Plano | Quem cria branches e faz merges | Eu | Controle do histórico do repositório |
 
 ## Logs
 - `docs/ai-log/01-claude-md.md`: criação e revisão do CLAUDE.md.
 - `docs/ai-log/02-ferramentas.md`: criação da skill `cenario-teste-csv`.
   A instalação dos plugins foi feita pelo menu `/plugin`, que não aparece nos exports.
+- `docs/ai-log/03-plano-implementacao.md`: plano de implementação (salvo em `docs/PLANO.md`).
