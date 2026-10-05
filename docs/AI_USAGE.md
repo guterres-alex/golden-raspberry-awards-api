@@ -72,6 +72,8 @@
 | Revisão final | Carga do CSV depois de o servidor aceitar requisições | Carga antes de o servidor subir | Evitar resposta vazia indistinguível do caso "sem dados" |
 | Revisão final | LENIENT nos testes de erro contrariava a regra STRICT | Exceção registrada no CLAUDE.md | Manter regra e código coerentes |
 | Revisão final | CSV fora de UTF-8, `keyOf` duplicado, invariantes nos tipos | Mantidos | Já decididos ou defensivos demais para o escopo |
+| Refatoração | — | Reorganizei o leitor, a importação e o cálculo para um padrão mais atualizado | Os testes de integração garantiram que o comportamento não mudou |
+| Padronização | Código gerado com 4 espaços nos serviços refatorados | Indentação com tab, igual ao resto do projeto | Consistência do código |
 
 ## Logs
 - `docs/ai-log/01-claude-md.md`: criação e revisão do CLAUDE.md.
