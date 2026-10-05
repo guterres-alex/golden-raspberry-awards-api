@@ -21,6 +21,7 @@
   todo commit passa pela minha revisão.
 - Plan mode para análise e planejamento; aprovação manual de edições.
 
+
 ## Decisões e correções
 | Etapa | O que a IA propôs | O que decidi | Motivo |
 |---|---|---|---|
