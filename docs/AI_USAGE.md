@@ -61,6 +61,7 @@
 | Revisão | Manter a verificação exata do content type | `contentTypeCompatibleWith` | Evita quebra caso a resposta inclua `;charset=UTF-8` |
 | Cenários | Arquivos gerados sem quebra de linha final, mesmo com a regra no CLAUDE.md | Correção em commit `style` separado; o agente salvou uma memória para conferir sempre | Limitação da ferramenta de escrita; manter o histórico limpo |
 | Cenários | Instrução ambígua minha na retomada fez o agente criar o cenário 5 sem apresentar a proposta | Conferi o cálculo depois da criação e reforcei o passo 0 da skill | Instruções explícitas evitam que o agente interprete "seguir" como aprovação |
+| Cenários | Padrão de teste de falha do CLAUDE.md usava `.properties()`, de prioridade menor que o `application.properties`; os testes falharam | Caminho passado como argumento de linha de comando; contexto fechado se subir inesperadamente; CLAUDE.md corrigido | O teste revelou um erro na própria regra; corrigir a regra, não o esperado |
 
 ## Logs
 - `docs/ai-log/01-claude-md.md`: criação e revisão do CLAUDE.md.
