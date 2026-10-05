@@ -56,7 +56,9 @@ de produtores.
   separadores `,` / ` and ` / `, and `, produtor repetido no mesmo filme, filme repetido, linhas malformadas ignoradas.
 - Não fixar `spring.datasource.url`: cada contexto de teste precisa de um H2 próprio.
 - Arquivo inexistente e cabeçalho inválido: `assertThrows` em
-  `new SpringApplicationBuilder(GoldenRaspberryAwardsApiApplication.class).properties("spring.main.web-application-type=none", "app.movies.csv-path=...").run()`.
+  `new SpringApplicationBuilder(GoldenRaspberryAwardsApiApplication.class).properties("spring.main.web-application-type=none").run("--app.movies.csv-path=...")`,
+  com o contexto num try-with-resources para fechá-lo se a aplicação subir.
+  O `csv-path` vai em `run(...)` porque `.properties(...)` grava defaults que o `application.properties` sobrescreve.
 - Rodar `./mvnw test` ao fim de cada etapa. Relatar só o resumo (executados, falhas, erros) e o detalhe das falhas, nunca o log completo.
 
 ## Forma de trabalhar
