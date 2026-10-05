@@ -21,7 +21,8 @@ import org.springframework.test.web.servlet.MockMvc;
  *   - "Ana, Bia"           → Ana, Bia
  *   - "Bia and Caio"       → Bia, Caio
  *   - "Ana, Bia, and Caio" → Ana, Bia, Caio
- *   - Sem dividir por ",", Ana sai do cálculo e max = 3 (Bia).
+ *   - Sem dividir por "," (mantendo ", and "), surge o produtor "Ana, Bia"
+ *     (2000 → 2004): max = 4 ("Ana, Bia") e min = 1 só com Caio.
  *   - Sem dividir por " and ", surge "Bia and Caio" e min = max = 4.
  *   - Dividindo por "," antes de " and ", sobra "and Caio" e Caio sai do min.
  *
