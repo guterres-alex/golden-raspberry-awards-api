@@ -113,7 +113,6 @@ public class MovieCsvReader {
 			log.warn("Linha {} ignorada: título vazio", lineNumber);
 			return null;
 		}
-
 		if (title.length() > ColumnLimits.TEXT_MAX_LENGTH) {
 			log.warn("Linha {} ignorada: título excede {} caracteres", lineNumber, ColumnLimits.TEXT_MAX_LENGTH);
 			return null;
