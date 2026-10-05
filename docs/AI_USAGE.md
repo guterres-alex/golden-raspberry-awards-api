@@ -12,7 +12,7 @@
 1. Planejamento — concluído
 2. Contexto (CLAUDE.md) — concluído
 3. Ferramentas (plugin de revisão e skill de testes) — concluído
-4. Implementação em etapas — pendente
+4. Implementação em etapas — em andamento
 5. Testes de integração — pendente
 6. Documentação — pendente
 
@@ -44,9 +44,16 @@
 | Plano | Habilitar o H2 console | Desligado | Desnecessário; o log basta para verificar a carga |
 | Plano | Substituir o `contextLoads` | Pelo teste do oráculo na etapa do endpoint | Redundante e fora do padrão MockMvc |
 | Plano | Quem cria branches e faz merges | Eu | Controle do histórico do repositório |
+| Entidades | Parada para decidir sobre o Lombok | Não usar | Ganho de ~40 linhas; o design das entidades exigiria exceções e cuidados com o `@Builder` |
+| Entidades | IntelliJ sugeriu `final` nas coleções | Não aplicado | A especificação JPA proíbe campos persistentes `final` |
+| Entidades | Testes com SQL salvos em arquivo temporário e filtrados | Aceito | Economia de tokens, conforme o CLAUDE.md |
+| Revisão | `keyOf` duplicado em Producer e Studio | Mantido | Extrair um utilitário seria abstração sem necessidade concreta |
+| Revisão | Arquivos sem quebra de linha final | Corrigido e regra adicionada ao CLAUDE.md | Evitar ruído no diff e repetição nas próximas etapas |
+
 
 ## Logs
 - `docs/ai-log/01-claude-md.md`: criação e revisão do CLAUDE.md.
 - `docs/ai-log/02-ferramentas.md`: criação da skill `cenario-teste-csv`.
   A instalação dos plugins foi feita pelo menu `/plugin`, que não aparece nos exports.
 - `docs/ai-log/03-plano-implementacao.md`: plano de implementação (salvo em `docs/PLANO.md`).
+- `docs/ai-log/04-entidades.md`: etapa 1, entidades e repositórios; decisão sobre o Lombok e revisão de código.
