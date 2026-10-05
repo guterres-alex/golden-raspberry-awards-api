@@ -130,11 +130,12 @@ Os erros seguem o formato Problem Details (RFC 9457), com `Content-Type: applica
 - título vazio ou nenhum produtor;
 - título, nome de produtor ou nome de estúdio com mais de 255 caracteres.
 
-**A inicialização falha** apenas quando:
+**Erros de configuração que impedem a inicialização:**
 
 - `app.movies.csv-path` não começa com `classpath:` ou `file:`;
 - o arquivo não existe;
 - o cabeçalho é inválido ou o arquivo está vazio.
+- falhas de leitura do arquivo ou de persistência também impedem a inicialização.
 
 ## Testes
 
@@ -143,8 +144,9 @@ Os erros seguem o formato Problem Details (RFC 9457), com `Content-Type: applica
 .\mvnw.cmd test      # Windows
 ```
 
-Todos os testes são de integração: sobem a aplicação com `@SpringBootTest` e chamam o endpoint via MockMvc,
-comparando o JSON completo. Cada cenário usa um CSV próprio em `src/test/resources/datasets/`.
+Todos os testes são de integração. Os testes do endpoint sobem a aplicação com `@SpringBootTest` e chamam a API via MockMvc,
+comparando o JSON completo; os testes de falha de inicialização sobem a aplicação com `SpringApplicationBuilder`.
+Cada cenário usa um CSV próprio em `src/test/resources/datasets/`.
 
 | Classe de teste                   | Cenário                                                                 |
 |-----------------------------------|-------------------------------------------------------------------------|
