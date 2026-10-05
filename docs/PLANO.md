@@ -38,7 +38,8 @@ Toda etapa termina com `./mvnw test`, relatando executados, falhas e erros, e pa
   - Filme repetido (título sem diferenciar caixa + ano): vale a primeira ocorrência, e a repetição gera `log.warn`.
   - Mantém em memória um `Map<nameKey, Producer>` e um `Map<nameKey, Studio>`, para que a primeira grafia prevaleça e para não consultar o banco a cada linha.
   - Ao final, registra o total carregado com `log.info`.
-- `…/config/MovieDataLoader.java`: `ApplicationRunner` que chama o leitor e depois o `import`. Como roda dentro de `SpringApplication.run`, uma exceção derruba a inicialização.
+- `…/config/MovieDataLoader.java`: `SmartInitializingSingleton` que, em `afterSingletonsInstantiated()`, chama o leitor e depois o `import`. Roda durante o refresh, antes de o servidor web aceitar requisições, e uma exceção derruba a inicialização.
+  (Na primeira versão era um `ApplicationRunner`, que roda com o servidor já no ar; trocado na revisão final.)
 
 **Verificação:** `./mvnw test` verde, com o `contextLoads` já carregando o CSV original. Depois, `./mvnw spring-boot:run`: a aplicação deve subir e o log deve mostrar o total de filmes carregados, sem warns inesperados no CSV original.
 **Branch:** `feat/carga-csv`. **Commit:** `feat: lê e carrega o CSV de filmes no H2 na inicialização`
@@ -81,8 +82,8 @@ Ordem sugerida:
 11. BOM e cabeçalho válido com variações: o arquivo começa com os bytes `EF BB BF` e o cabeçalho é ` Year ; TITLE;Studios;producers ;WINNER`.
     A aplicação deve subir e devolver um resultado conhecido. Conferir os bytes do arquivo com `od -c` depois de criá-lo.
 12. falha de inicialização: arquivo inexistente, cabeçalho inválido e caminho sem prefixo (`assertThrows` com `SpringApplicationBuilder`).
-    O Spring embrulha a exceção lançada pelo `ApplicationRunner` numa `IllegalStateException("Failed to execute ApplicationRunner")`,
-    então os testes devem conferir a causa raiz (tipo e mensagem), não só a exceção externa.
+    A exceção do leitor sai do `refresh()` sem embrulho, mas os testes conferem a causa mais específica (tipo e mensagem),
+    para não depender de como o Spring propaga a falha.
 13. verbos e status HTTP (nível 2 de Richardson), com o CSV original e sem dataset próprio:
     - `POST /api/producers/award-intervals` → `405` com content type compatível com `application/problem+json`;
     - `GET` numa URL inexistente → `404` com content type compatível com `application/problem+json`.

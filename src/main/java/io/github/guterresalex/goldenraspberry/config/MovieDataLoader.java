@@ -1,14 +1,13 @@
 package io.github.guterresalex.goldenraspberry.config;
 
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
+import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.stereotype.Component;
 
 import io.github.guterresalex.goldenraspberry.service.MovieCsvReader;
 import io.github.guterresalex.goldenraspberry.service.MovieImportService;
 
 @Component
-public class MovieDataLoader implements ApplicationRunner {
+public class MovieDataLoader implements SmartInitializingSingleton {
 
 	private final MoviesProperties properties;
 	private final MovieCsvReader reader;
@@ -21,7 +20,7 @@ public class MovieDataLoader implements ApplicationRunner {
 	}
 
 	@Override
-	public void run(ApplicationArguments args) {
+	public void afterSingletonsInstantiated() {
 		importService.importMovies(reader.read(properties.csvPath()));
 	}
 
