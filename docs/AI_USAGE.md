@@ -67,6 +67,10 @@
 | README | Uso de IA apenas como link para `docs/` | Seção própria no README | Registro de interações exigido pela especificação |
 | README | Limitações sem os erros de digitação do CSV | Acrescentada | Decisão consciente desde o CLAUDE.md |
 | README | Verificação só com o CSV original | Verificação também com CSVs de teste, pelas três formas de execução | Garantir que o comando de outro CSV funciona de verdade |
+| Revisão final | Comentários com cálculos imprecisos e um teste que passaria pelo motivo errado | Corrigidos | O comentário com o cálculo à mão é a documentação do teste |
+| Revisão final | Carga do CSV depois de o servidor aceitar requisições | Carga antes de o servidor subir | Evitar resposta vazia indistinguível do caso "sem dados" |
+| Revisão final | LENIENT nos testes de erro contrariava a regra STRICT | Exceção registrada no CLAUDE.md | Manter regra e código coerentes |
+| Revisão final | CSV fora de UTF-8, `keyOf` duplicado, invariantes nos tipos | Mantidos | Já decididos ou defensivos demais para o escopo |
 
 ## Logs
 - `docs/ai-log/01-claude-md.md`: criação e revisão do CLAUDE.md.
@@ -79,3 +83,4 @@
 - `docs/ai-log/07-cenarios-parte2.md`: etapa 4, cenários 4 a 8 (pares fora de ordem, nomes, separadores e repetições).
 - `docs/ai-log/07-cenarios-parte3.md`: etapa 4, cenários 9 a 13 (linhas malformadas, winner, BOM, falha de inicialização e status HTTP).
 - `docs/ai-log/08-readme.md`: etapa 5, README; verificação seguindo o README do zero, inclusive com outros CSVs.
+- `docs/ai-log/09-revisao-final.md`: revisão final com os 6 agentes do pr-review-toolkit; correções de comentários, dataset e carga do CSV, e novos cenários.
