@@ -32,7 +32,7 @@ de produtores.
 
 ## Regra de cálculo: intervalo entre prêmios
 - Uma única query que retorna apenas os pares (produtor, ano) de filmes vencedores, ordenados por `producer.id` e ano.
-- Calcular em Java numa única passada: para cada produtor, intervalo = ano atual − ano da vitória anterior desse produtor.
+- Calcular em Java a partir dos pares consecutivos de cada produtor: intervalo = ano atual − ano da vitória anterior desse produtor.
 - Produtores com menos de 2 vitórias não entram no cálculo.
 - Intervalo 0 é válido: o mesmo produtor vencendo com filmes diferentes no mesmo ano.
 - `min` e `max` incluem todos os empatados, inclusive vários pares do mesmo produtor. Um produtor pode estar nos dois.
@@ -70,3 +70,4 @@ de produtores.
 - Nunca executar `git commit`, `git push` nem comandos que alterem o histórico git.
   Ao fim de cada etapa, sugerir a mensagem de commit em Conventional Commits, em português.
 - Todo arquivo termina com quebra de linha.
+- Código Java indentado com tab.

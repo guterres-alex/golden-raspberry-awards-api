@@ -61,7 +61,7 @@ No Windows, use barras normais no caminho: `file:C:/dados/lista.csv`. O `package
 |------------------------|---------------------------|------------------------------------------------------------------|
 | `app.movies.csv-path`  | `classpath:movielist.csv` | CSV carregado ao iniciar. Exige o prefixo `classpath:` ou `file:`. |
 
-O banco é um H2 em memória, recriado a cada execução. O console do H2 está desligado.
+O banco é um H2 em memória, recriado a cada execução.
 
 ## Endpoint
 
@@ -162,6 +162,10 @@ comparando o JSON completo. Cada cenário usa um CSV próprio em `src/test/resou
 | `BomCabecalhoVariacoesTest`       | BOM e cabeçalho com caixa e espaços diferentes                          |
 | `FalhaInicializacaoTest`          | caminho sem prefixo, arquivo inexistente, cabeçalho inválido e arquivo vazio |
 | `VerbosStatusHttpTest`            | `405` e `404` com Problem Details                                       |
+| `NomeComAndSemEspacosTest`        | "and" dentro do nome não separa produtores                              |
+| `CaminhoPrefixoFileTest`          | CSV carregado por caminho absoluto com `file:`                          |
+| `Limite255ProdutorEstudioTest`    | produtor e estúdio com exatamente 255 caracteres                        |
+| `EstudioVazioTest`                | filme sem estúdio conta no resultado                                    |
 
 ## Estrutura do projeto
 
@@ -181,6 +185,12 @@ Pacote base `io.github.guterresalex.goldenraspberry`:
   vira um único produtor com esse nome.
 - O CSV precisa estar em UTF-8. Um arquivo salvo em outra codificação (ex.: Windows-1252) é lido sem erro,
   mas os caracteres acentuados são corrompidos, e o mesmo produtor pode virar dois.
+- O limite de 255 caracteres vale para o nome como está no CSV. Um nome com caracteres que crescem ao virar minúsculas (ex.: `İ`) 
+  pode gerar uma chave acima do limite e impedir a inicialização.
+- O ano não tem faixa de validação: valores absurdos (negativos ou muito grandes) são aceitos.
+- Espaços Unicode (como o espaço não separável) e o separador ` AND ` em maiúsculas não são tratados.
+- Campos entre aspas no padrão RFC 4180 não são suportados: um `;` dentro do título invalida a linha.
+- A carga faz um insert por entidade, adequado ao volume do desafio.
 
 ## Uso de IA
 
