@@ -13,8 +13,8 @@
 2. Contexto (CLAUDE.md) — concluído
 3. Ferramentas (plugin de revisão e skill de testes) — concluído
 4. Implementação em etapas — concluído
-5. Testes de integração — pendente
-6. Documentação — pendente
+5. Testes de integração — concluído
+6. Documentação — concluído
 
 ## Configurações do agente
 - Commits e push bloqueados para o agente em `.claude/settings.json`;
@@ -63,11 +63,14 @@
 | Cenários | Instrução ambígua minha na retomada fez o agente criar o cenário 5 sem apresentar a proposta | Conferi o cálculo depois da criação e reforcei o passo 0 da skill | Instruções explícitas evitam que o agente interprete "seguir" como aprovação |
 | Cenários | Padrão de teste de falha do CLAUDE.md usava `.properties()`, de prioridade menor que o `application.properties`; os testes falharam | Caminho passado como argumento de linha de comando; contexto fechado se subir inesperadamente; CLAUDE.md corrigido | O teste revelou um erro na própria regra; corrigir a regra, não o esperado |
 | Cenários | Corpo do erro com STRICT completo dependeria de textos do Spring | LENIENT nos campos estáveis do RFC 9457, como exceção explicada | Testar o comportamento do projeto, não o texto do framework |
+| README | Usar outro CSV só via `spring-boot:run` | Incluí a execução pelo jar, caminho no Windows e aspas no PowerShell | É o comando que o avaliador usará com os próprios dados |
+| README | Uso de IA apenas como link para `docs/` | Seção própria no README | Registro de interações exigido pela especificação |
+| README | Limitações sem os erros de digitação do CSV | Acrescentada | Decisão consciente desde o CLAUDE.md |
+| README | Verificação só com o CSV original | Verificação também com CSVs de teste, pelas três formas de execução | Garantir que o comando de outro CSV funciona de verdade |
 
 ## Logs
 - `docs/ai-log/01-claude-md.md`: criação e revisão do CLAUDE.md.
-- `docs/ai-log/02-ferramentas.md`: criação da skill `cenario-teste-csv`.
-  A instalação dos plugins foi feita pelo menu `/plugin`, que não aparece nos exports.
+- `docs/ai-log/02-ferramentas.md`: criação da skill `cenario-teste-csv`. A instalação dos plugins foi feita pelo menu `/plugin`, que não aparece nos exports.
 - `docs/ai-log/03-plano-implementacao.md`: plano de implementação (salvo em `docs/PLANO.md`).
 - `docs/ai-log/04-entidades.md`: etapa 1, entidades e repositórios; decisão sobre o Lombok e revisão de código.
 - `docs/ai-log/05-carga-csv.md`: etapa 2, leitura e carga do CSV; ajustes do BOM, da chave de filme repetido e do limite de 255 caracteres, revisão de código e de falhas silenciosas.
@@ -75,3 +78,4 @@
 - `docs/ai-log/07-cenarios-parte1.md`: etapa 4, cenários 1 a 3 (resultado vazio, intervalo 0 e empates).
 - `docs/ai-log/07-cenarios-parte2.md`: etapa 4, cenários 4 a 8 (pares fora de ordem, nomes, separadores e repetições).
 - `docs/ai-log/07-cenarios-parte3.md`: etapa 4, cenários 9 a 13 (linhas malformadas, winner, BOM, falha de inicialização e status HTTP).
+- `docs/ai-log/08-readme.md`: etapa 5, README; verificação seguindo o README do zero, inclusive com outros CSVs.
