@@ -84,4 +84,5 @@
 - `docs/ai-log/07-cenarios-parte2.md`: etapa 4, cenários 4 a 8 (pares fora de ordem, nomes, separadores e repetições).
 - `docs/ai-log/07-cenarios-parte3.md`: etapa 4, cenários 9 a 13 (linhas malformadas, winner, BOM, falha de inicialização e status HTTP).
 - `docs/ai-log/08-readme.md`: etapa 5, README; verificação seguindo o README do zero, inclusive com outros CSVs.
-- `docs/ai-log/09-revisao-final.md`: revisão final com os 6 agentes do pr-review-toolkit; correções de comentários, dataset e carga do CSV, e novos cenários.
+- `docs/ai-log/09-revisao-final.md`: revisão final com os 6 agentes do pr-review-toolkit e correção dos comentários (passo 1).
+- `docs/ai-log/09b-revisao-final-continuacao.md`: continuação da revisão final: dataset, regra do LENIENT, carga antes do servidor subir e quatro cenários novos.
