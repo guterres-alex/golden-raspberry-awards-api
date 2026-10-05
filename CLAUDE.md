@@ -63,3 +63,4 @@ de produtores.
 - Trabalhar em passos pequenos e parar ao fim de cada etapa para revisão.
 - Nunca executar `git commit`, `git push` nem comandos que alterem o histórico git.
   Ao fim de cada etapa, sugerir a mensagem de commit em Conventional Commits, em português.
+- Todo arquivo termina com quebra de linha.
