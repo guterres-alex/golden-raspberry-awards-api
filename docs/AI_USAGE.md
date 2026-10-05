@@ -49,6 +49,12 @@
 | Entidades | Testes com SQL salvos em arquivo temporário e filtrados | Aceito | Economia de tokens, conforme o CLAUDE.md |
 | Revisão | `keyOf` duplicado em Producer e Studio | Mantido | Extrair um utilitário seria abstração sem necessidade concreta |
 | Revisão | Arquivos sem quebra de linha final | Corrigido e regra adicionada ao CLAUDE.md | Evitar ruído no diff e repetição nas próximas etapas |
+| Carga CSV | Remoção do BOM com o caractere literal | Pedi o escape `\uFEFF`; o agente verificou e corrigiu a própria ferramenta, que tinha gravado o literal | Caractere invisível no código pode se perder conforme a codificação |
+| Carga CSV | Chave de filme repetido concatenando título e ano | Record (título, ano) | Evitar colisões como "Filme1"+999 e "Filme"+1999 |
+| Revisão | Falhas silenciosas: log sem total de linhas ignoradas | Aplicado | Uma carga toda rejeitada subiria sem aviso no resumo |
+| Revisão | Título longo (>255) derruba a inicialização; sugeriu só registrar | Título ou nome acima de 255 caracteres = linha malformada, ignorada com aviso | Coerente com a regra de não derrubar a aplicação por uma linha; limite em constante única |
+| Revisão | CSV em outra codificação lido sem erro | Registrado como risco | O CLAUDE.md define UTF-8; detectar codificação seria complexidade desnecessária |
+| Revisão | Espaço não separável passa pelo trim | Mantido | Caso improvável; mudaria a regra de normalização |
 
 
 ## Logs
@@ -57,3 +63,4 @@
   A instalação dos plugins foi feita pelo menu `/plugin`, que não aparece nos exports.
 - `docs/ai-log/03-plano-implementacao.md`: plano de implementação (salvo em `docs/PLANO.md`).
 - `docs/ai-log/04-entidades.md`: etapa 1, entidades e repositórios; decisão sobre o Lombok e revisão de código.
+- `docs/ai-log/05-carga-csv.md`: etapa 2, leitura e carga do CSV; ajustes do BOM, da chave de filme repetido e do limite de 255 caracteres, revisão de código e de falhas silenciosas.

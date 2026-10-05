@@ -70,8 +70,10 @@ Ordem sugerida:
 6. separadores `,` / ` and ` / `, and `
 7. produtor repetido no mesmo filme
 8. filme repetido (vale a primeira ocorrência)
-9. linhas malformadas ignoradas
-10. falha de inicialização: arquivo inexistente, cabeçalho inválido e caminho sem prefixo (`assertThrows` com `SpringApplicationBuilder`)
+9. linhas malformadas ignoradas (inclui uma linha com título de 256 caracteres)
+10. falha de inicialização: arquivo inexistente, cabeçalho inválido e caminho sem prefixo (`assertThrows` com `SpringApplicationBuilder`).
+    O Spring embrulha a exceção lançada pelo `ApplicationRunner` numa `IllegalStateException("Failed to execute ApplicationRunner")`,
+    então os testes devem conferir a causa raiz (tipo e mensagem), não só a exceção externa.
 
 **Verificação:** `./mvnw test` a cada cenário, com o total de testes aumentando. Se um cenário falhar com o cálculo correto, ele achou um bug: o agente para e relata.
 **Branch:** `test/cenarios-csv`. Um commit por cenário, ex.: `test: adiciona cenário de intervalo zero`.
@@ -96,4 +98,5 @@ Ordem sugerida:
 ## Riscos remanescentes
 - **Regex de separação:** um nome que contenha ` and ` será dividido em dois. Isso é aceito, porque o CLAUDE.md proíbe corrigir nomes.
 - **Etapas 1 e 2 sem teste dedicado:** só são permitidos testes via MockMvc, então essas etapas são verificadas pelo `contextLoads` e pelo log. A cobertura real vem nas etapas 3 e 4.
+- **Codificação do CSV:** o arquivo é lido em UTF-8 com o decodificador padrão, que troca bytes inválidos por U+FFFD sem erro nem aviso. Um CSV salvo em Windows-1252 carrega "Almodóvar" como "Almod�var", e o mesmo produtor pode virar dois, alterando os intervalos em silêncio. Aceito: falhar a inicialização por isso contraria o CLAUDE.md.
 - **Spring Boot 4 / Jackson 3:** os pacotes mudaram em relação ao Boot 3. O risco de imports errados é mitigado compilando a cada etapa.

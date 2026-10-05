@@ -18,7 +18,8 @@ de produtores.
 - Ignorar linhas em branco. Aplicar trim a todos os campos antes de validar.
 - `winner`: vencedor apenas se `equalsIgnoreCase("yes")`.
 - `producers` e `studios`: dividir com a regex `,\s*and\s+|,|\s+and\s+` aplicada ao campo inteiro, aplicar trim, descartar vazios. Sem correções de nomes. Studios vazios são permitidos.
-- Linha malformada (número de colunas ≠ 5, ano não inteiro, título vazio, nenhum produtor): ignorar com `log.warn` indicando o número da linha.
+- Linha malformada (número de colunas ≠ 5, ano não inteiro, título vazio, nenhum produtor, título ou nome de produtor ou estúdio com mais de 255 caracteres): ignorar com `log.warn` indicando o número da linha.
+  O limite de 255 é a constante `ColumnLimits.TEXT_MAX_LENGTH`, usada tanto na validação quanto no `length` das colunas.
 - Filme repetido (mesmo título sem diferenciar maiúsculas + mesmo ano): ignorar a repetição com `log.warn`.
 - Falhar a inicialização apenas se o arquivo não existir ou o cabeçalho for inválido.
 - A carga roda uma única vez ao iniciar, numa única transação.
