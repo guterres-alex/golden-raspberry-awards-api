@@ -12,9 +12,10 @@ import org.springframework.core.NestedExceptionUtils;
 /*
  * Caso: a inicialização falha quando o CSV não pode ser usado.
  *
- * O Spring embrulha a exceção do ApplicationRunner numa
- * IllegalStateException("Failed to execute ApplicationRunner"), então cada
- * teste confere o tipo e a mensagem da causa raiz.
+ * A carga roda em afterSingletonsInstantiated(), durante o refresh e antes de
+ * o servidor web subir, e a exceção do leitor sai do run(...) sem embrulho.
+ * Mesmo assim, cada teste confere o tipo e a mensagem da causa mais
+ * específica, para não depender de como o Spring propaga a falha.
  *
  *   - Arquivo inexistente: datasets/nao-existe.csv não existe.
  *   - Cabeçalho inválido: datasets/cabecalho-invalido.csv tem os nomes certos,
