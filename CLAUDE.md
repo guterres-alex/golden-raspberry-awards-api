@@ -48,6 +48,9 @@ de produtores.
 - Somente testes de integração: `@SpringBootTest` + `@AutoConfigureMockMvc` + `MockMvc`. Proibido usar testes unitários, mocks, `@MockitoBean` e slices (`@WebMvcTest`, `@DataJpaTest`).
 - Confirmar os imports do Spring Boot 4 na compilação; não presumir os pacotes do Boot 3.
 - Comparar o JSON completo com `content().json(expected, JsonCompareMode.STRICT)`.
+  Exceção: respostas de erro geradas pelo Spring (Problem Details) são comparadas em LENIENT,
+  só nos campos `title` e `status`. O `type` fica de fora porque o Spring o omite quando vale
+  `about:blank`; `detail` e `instance` variam entre versões.
 - Oráculo do `movielist.csv` original:
   min = Joel Silver, 1, 1990 → 1991; max = Matthew Vaughn, 13, 2002 → 2015.
 - Cenários em `src/test/resources/datasets/*.csv`, selecionados com
